@@ -41,11 +41,11 @@ Before proceeding with the Jenkins upgrade facilitated by the scripts in this re
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/omade88/cst_jenkins_project.git
+   git clone https://github.com/cloudsolutionstech/cst-cicd-jenkins-project.git
    ```
 
 2. Change to the repository directory:
 
    ```bash
-   cd cst_jenkins_project
+   cd cst-cicd-jenkins-project
    ```
