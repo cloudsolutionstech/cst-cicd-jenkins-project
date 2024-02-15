@@ -1,5 +1,6 @@
 # Jenkins CICD Project
 
+This project demonstrates how to set up Jenkins. Jenkins is a powerful automation server used for continuous integration and continuous delivery (CI/CD) pipelines.
 
 ## Overview
 
@@ -13,7 +14,9 @@ This repository hosts scripts and documentation crafted to facilitate the seamle
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Background
 
@@ -49,3 +52,28 @@ Before proceeding with the Jenkins upgrade facilitated by the scripts in this re
    ```bash
    cd cst-cicd-jenkins-project
    ```
+
+## Usage
+
+Follow the instructions in this [Usage Guide](docs/UsageGuide.md) README to set up Jenkins using Docker and start automating your CI/CD workflows. Once Jenkins is set up, you can use it to create and manage CI/CD pipelines for your projects. Here are some common tasks:
+
+Create a New Pipeline:
+- Click on "New Item" on the Jenkins dashboard.
+Enter a name for your pipeline and select "Pipeline", then click "OK".
+Configure your pipeline using a Jenkinsfile or by specifying pipeline script directly.
+
+Trigger a Build:
+- Whenever you push changes to your repository, Jenkins can automatically trigger a build based on your configured webhook or polling interval.
+
+View Build Results:
+- Jenkins provides detailed build logs and reports, allowing you to analyze the outcome of each build.
+
+## Contributing
+
+Contributions are welcome! If you find any issues or have suggestions for improvement, feel free to open an issue or create a pull request. Follow the guideline outlined in the [Contributing Guide](CONTRIBUTING.md)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
