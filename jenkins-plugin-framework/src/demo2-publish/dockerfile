@@ -1,0 +1,16 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS builder
+
+WORKDIR /jenkins-plugin-framework/src
+COPY jenkins-plugin-framework/src/Pi.Math/Pi.Math.csproj ./Pi.Math/
+COPY jenkins-plugin-framework/src/Pi.Runtime/Pi.Runtime.csproj ./Pi.Runtime/
+COPY jenkins-plugin-framework/src/Pi.Web/Pi.Web.csproj ./Pi.Web/
+
+WORKDIR /jenkins-plugin-framework/src/Pi.Web
+RUN dotnet restore
+
+# App image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
+
+EXPOSE 80
+ENTRYPOINT ["dotnet", "Pi.Web.dll"]
+CMD ["-m", "console", "-dp", "6"]

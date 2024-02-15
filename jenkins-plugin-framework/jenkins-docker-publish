@@ -1,0 +1,42 @@
+# Demo 2
+
+## Publish Docker Image to Docker Hub
+
+## Overview
+
+Build Docker image and publish to Docker Hub; search for `Docker Hub` in [plugins](https://plugins.jenkins.io/).
+
+## Plugin Selection
+
+- Navigate to the Jenkins Plugins Index.
+- Search for "Docker Hub".
+- Consider using the CloudBees Docker Build & Publish plugin instead of the traditional "Docker" plugin, as it has fewer dependencies and features.
+
+## Plugin Installation
+
+- Go to Jenkins, then navigate to "Manage Jenkins" > "Manage Plugins".
+- Switch to the "Available" tab.
+- Install the CloudBees Docker Build & Publish plugin.
+
+## Configuration
+
+- In your Jenkins job (e.g., pi job), add a build and publish step.
+- Specify the repository for your Docker Hub.
+- Add registry credentials for Docker Hub by providing your Docker Hub username and authentication token.
+- registry credentials - add new username/password creds
+- use Docker Hub username and [authentication token](https://hub.docker.com/settings/security)
+- advanced - Dockerfile path
+- Optionally, specify the Dockerfile path if it's not in the default location.
+
+## Handling Limitations
+
+- Note that the CloudBees Docker Build & Publish plugin may have limitations, potentially causing the build to fail.
+- To address this, set up environment variables DOCKER_HUB_USER and DOCKER_HUB_PASSWORD.
+- Add a build step to log into Docker Hub using the provided credentials before building and pushing the Docker image.
+
+```
+docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+
+```
+
+By following these steps, you'll be able to build Docker images and publish them to Docker Hub using Jenkins. Ensure to handle plugin limitations and provide necessary credentials for seamless integration.

@@ -1,0 +1,59 @@
+# Demo - Manual Jenkins and docekr integration Build SetUp
+
+## Overview
+In this demo, we'll set up a standard Jenkins build process for a .NET Core project with manual plugin installation steps. This includes installing necessary utilities on the Jenkins host machine, configuring GitHub integration, setting up the project, and running tests.
+
+## Steps
+
+## Open Jenkins
+Access Jenkins in your web browser.
+
+## Install Utilities on Jenkins Host Machine
+Update the package list: sudo apt-get update
+Install .NET SDK 7.0: sudo apt-get install -y dotnet-sdk-7.0
+Verify the installation: dotnet --version
+Set environment variables:
+- export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT="true" \
+PATH="${PATH}:/root/.dotnet"
+
+
+## Setup the Jenkins project & clone the repository
+
+Connect to GitHub and search for the "GitHub Integration" plugin in the plugin catalogue.
+Install the "GitHub Integration" plugin in Jenkins from the "Manage Jenkins" > "Manage Plugins" > "Available" tab.
+Create a new freestyle job named pi:
+- Configure Git SCM with the repository URL https://github.com/omade88/cst_jenkins_project.git (no credentials required as it's a public repository).
+- Set the branch specification to \*master.
+- Configure advanced clone settings: shallow clone with a depth of 1 and clean before checkout.
+Set up build triggers:
+- Enable polling SCM.
+- Schedule periodic builds using the schedule H/5 * * * *.
+Configure build steps:
+- Add a shell step to list files: ls.
+Build the job to verify the repository download.
+
+
+## Build the code
+Search for a .NET Core plugin in the catalogue.
+As .NET Core SDK installation requires server-level setup, add build steps to build and test the code:
+- Build step: dotnet build ./jenkins-plugin-model/src/Pi.Web/Pi.Web.csproj.
+- Smoke test: dotnet ./jenkins-plugin-model/src/Pi.Web/bin/Debug/netcoreapp3.1/Pi.Web.dll.
+Run unit tests using NUnit:
+```
+dotnet test --logger "trx;LogFileName=Pi.Math.trx" ./jenkins-plugin-model/src/Pi.Math.Tests/Pi.Math.Tests.csproj
+
+dotnet test --logger "trx;LogFileName=Pi.Runtime.trx" ./jenkins-plugin-model/src/Pi.Runtime.Tests/Pi.Runtime.Tests.csproj
+
+```
+Browse workspace for .trx files and install the "MSTest" plugin from the catalogue.
+Add a post-build step for MSTest in the pi job with default options.
+
+
+## Run Tests
+Build the job and check console output.
+View test results per build and drill down into tests.
+Refresh the job page to view multiple builds trend report at the job level.
+
+
+## Conclusion
+By following these steps, you'll be able to set up a standard Jenkins build process for your .NET Core project with manual plugin installation steps. This ensures that your Jenkins environment is properly configured to build, test, and analyze your .NET Core codebase.
